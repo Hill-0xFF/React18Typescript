@@ -13,18 +13,17 @@ import { DataProvider } from './context/DataContext';
 import './css/style.css';
 
 function App() {
-
   return (
     <>
+      <Header title="React TS Blog" />
       <DataProvider>
-        <Header title="React TS Blog" />
         <Nav />
 
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/post" component={NewPost}/>
-          <Route path="/edit/:id" component={UpdatePost}/>
-          <Route path="/post/:id" component={PostPage}/>
+          <Route exact path="/post" component={NewPost} />
+          <Route path="/edit/:id" component={UpdatePost} />
+          <Route path="/post/:id" component={PostPage} />
           <Route path="/about" component={About} />
           <Route path="/*" component={Missing} />
         </Switch>
