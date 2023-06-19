@@ -1,8 +1,18 @@
 import Post from './Post'
-import { HomeProps } from "./Home"
 
-const Feed = ({posts}: HomeProps) => {
-  
+export interface IPosts {
+  id: number;
+  title: string;
+  datetime: string;
+  body: string;
+}
+
+
+type FeedProps = {
+  posts: IPosts[];
+};
+
+const Feed = ({posts}: FeedProps) => {
   return (
     <>
     {

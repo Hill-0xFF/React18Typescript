@@ -11,6 +11,7 @@ import About from './component/About';
 import Missing from './component/Missing';
 import UpdatePost from './component/UpdatePost';
 import useWindowSize from './hooks/useWindowSize';
+import useAxiosFetch from './hooks/useAxiosFetch';
 
 import api from './api/api';
 
@@ -40,30 +41,11 @@ function App() {
   const [updateBody, setUpdateBody] = useState('');
   const history = useHistory();
   const {width} = useWindowSize();
+  const {data, loading, fetchError} = useAxiosFetch('http://localhost:3500/posts');
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await api.get('posts')
-         if (response && response.data) setPosts(response.data)
-      } catch (err: any) {
-        // If not in the 200 response range ... directly from axios docs
-        // Error with response from API/backend
-        if (err.response instanceof Error) {
-          console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-        } else {
-          // No response at all
-          console.log(`Error: ${err.message}`);
-          
-        }
-        
-        
-      }
-    }
-    (async () => await fetchPosts())();
-  }, [])
+    setPosts(data)
+  }, [data])
 
   useEffect(() => {
     const filteredPosts = posts && (posts.filter(post => (
@@ -128,7 +110,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Home posts={searchResults} />
+          <Home posts={searchResults} loading={loading} fetchError={fetchError} />
         </Route>
         <Route exact path="/post">
           <NewPost
