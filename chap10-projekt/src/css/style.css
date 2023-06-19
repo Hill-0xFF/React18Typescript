@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Mynerve&family=PT+Sans+Narrow:wght@400;700&family=Zeyada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech&family=Share+Tech+Mono&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Courier New', Courier, monospace, sans-serif; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 500px;
+  min-height: 100vh;
+  width:100%;
+  padding: 1rem;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 13, 11, 1)0%,
+    rgba(13, 101, 110, 1) 100%
+
+  );
+  color: #fff;
+}
+
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  min-width: 500px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: solid 3px lime;
+  border-radius: 13px;
+
+  
+}
+
+.ColorContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  color: lime;
+  font-family: 'Press Start 2P';
+}
+
+.ColorFill {
+  display: flex;
+  flex-flow: row nowrap; 
+  flex-grow: 1;
+  justify-content: center;
+  align-items: flex-start; 
+  width: 100%;
+  height: 100%;
+  
+}
+
+.ColorInput {
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 4rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input__label { 
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  font-family: 'Dosis';
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: grey;
+  
+}
+
+.input__field {
+  width: 80%;
+  min-height: 48px;
+  border-radius: 2rem;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  color: lime;
+  background: linear-gradient(
+    90deg,
+    rgba(50, 50, 50, .2) 0%,
+    rgba(15, 15, 15, .5) 100%
+  )
+}
+
+.input__button {
+  min-height: 48px;
+  width: 100%;
+  /* min-width: 48px; */
+  border: none;
+  background: linear-gradient(
+    90deg,
+    rgba(112, 115, 77, 1) 0%,
+    rgba(181, 118, 23, .4) 100%
+  );
+  border-radius: 13px;
+  font-size: 1.5rem;
+  color: lime;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* jcc */
+    align-items: center;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: .25rem;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* jcc */
+    align-items: center;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: .25rem;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* jcc */
+    align-items: center;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: .25rem;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* jcc */
+    align-items: center;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: .25rem;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  section {
+    box-sizing: border-box;
+    padding: .25rem;
+    width: 75%;
+  }
+}
