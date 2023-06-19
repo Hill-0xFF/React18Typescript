@@ -10,6 +10,7 @@ import PostPage from './component/PostPage';
 import About from './component/About';
 import Missing from './component/Missing';
 import UpdatePost from './component/UpdatePost';
+import useWindowSize from './hooks/useWindowSize';
 
 import api from './api/api';
 
@@ -38,6 +39,7 @@ function App() {
   const [updateTitle, setUpdateTitle] = useState('');
   const [updateBody, setUpdateBody] = useState('');
   const history = useHistory();
+  const {width} = useWindowSize();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -121,7 +123,7 @@ function App() {
 
   return (
     <>
-      <Header title="React TS Blog" />
+      <Header title="React TS Blog" width={width} />
       <Nav search={search} setSearch={setSearch} />
 
       <Switch>
