@@ -12,7 +12,7 @@ import Missing from './component/Missing';
 import UpdatePost from './component/UpdatePost';
 import useWindowSize from './hooks/useWindowSize';
 import useAxiosFetch from './hooks/useAxiosFetch';
-
+import { DataProvider } from './context/DataContext';
 import api from './api/api';
 
 import './css/style.css';
