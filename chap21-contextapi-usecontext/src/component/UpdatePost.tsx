@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useParams, Link } from 'react-router-dom'
+import DataContext from "../context/DataContext"
 
 interface IUpdatePost {
   id: number,
@@ -9,7 +10,7 @@ interface IUpdatePost {
 }
 
 type UpdatePostProps = {
-  posts: IUpdatePost[],
+  searchResults: IUpdatePost[],
   updateBody: string,
   setUpdateBody: React.Dispatch<React.SetStateAction<string>>,
   updateTitle: string,
@@ -17,9 +18,13 @@ type UpdatePostProps = {
   handleUpdatePost: (id: number) => Promise<void>,
 }
 
-const UpdatePost = ({ posts, handleUpdatePost, updateBody, setUpdateBody, updateTitle, setUpdateTitle }: UpdatePostProps) => {
+const UpdatePost = () => {
+
+  const { searchResults, updateBody, setUpdateBody, updateTitle, setUpdateTitle, handleUpdatePost } = useContext<UpdatePostProps>(DataContext)
+
   const id = useParams();
-  const currentPost = posts.find(post => (post.id).toString() === Object.values(id).toString())
+  const currentPost = searchResults.find(post => (post.id).toString() === Object.values(id).toString())
+  console.log();
   
   useEffect(() => {
     if(currentPost) {

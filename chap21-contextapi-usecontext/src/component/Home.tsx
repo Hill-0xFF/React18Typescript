@@ -1,19 +1,22 @@
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 import Feed from './Feed';
 
-export interface IPosts {
-  id: number;
-  title: string;
-  datetime: string;
-  body: string;
-}
+// export interface IPosts {
+//   id: number;
+//   title: string;
+//   datetime: string;
+//   body: string;
+// }
 
-export type HomeProps = {
-  posts: IPosts[];
-  loading: boolean;
-  fetchError: null;
-};
+// export type HomeProps = {
+//   posts: IPosts[];
+//   loading: boolean;
+//   fetchError: null;
+// };
 
-const Home = ({ posts, loading, fetchError }: HomeProps) => {
+const Home = () => {
+  const { searchResults, loading, fetchError } = useContext(DataContext)
   return (
     <main className="main__home">
       {loading && (
@@ -39,10 +42,10 @@ const Home = ({ posts, loading, fetchError }: HomeProps) => {
           {fetchError}
         </p>
       )}
-      {!loading && !fetchError && posts && (
+      {!loading && !fetchError && searchResults && (
         <>
-          {posts.length ? (
-            <Feed posts={posts} />
+          {searchResults.length ? (
+            <Feed searchResults={searchResults} />
           ) : (
             <p style={{ marginTop: '2rem' }}>No posts to show...</p>
           )}

@@ -1,20 +1,24 @@
-import React from "react"
+import { useContext } from "react"
+import DataContext from "../context/DataContext"
 
-type NewPostProps = {
-  handleNewPost: (evt: React.FormEvent<HTMLFormElement>) => void,
-  // handleNewPost: (evt: React.FormEvent<HTMLFormElement>) => Promise<void>,
-  postTitle: string,
-  setPostTitle: React.Dispatch<React.SetStateAction<string>>,
-  postBody: string,
-  setPostBody: React.Dispatch<React.SetStateAction<string>>,
-}
+// type NewPostProps = {
+//   handleNewPost: (evt: React.FormEvent<HTMLFormElement>) => void,
+//   // handleNewPost: (evt: React.FormEvent<HTMLFormElement>) => Promise<void>,
+//   postTitle: string,
+//   setPostTitle: React.Dispatch<React.SetStateAction<string>>,
+//   postBody: string,
+//   setPostBody: React.Dispatch<React.SetStateAction<string>>,
+// }
 
 
-const NewPost = ({handleNewPost,
-  postTitle,
-  setPostTitle,
-  postBody,
-  setPostBody,}:NewPostProps) => {
+const NewPost = () => {
+  const {handleNewPost,
+    postTitle,
+    setPostTitle,
+    postBody,
+    setPostBody
+  } = useContext(DataContext)
+  
   return (
     <main className="NewPost">
       <h2>New Post</h2>

@@ -9,14 +9,14 @@ export interface IPosts {
 
 
 type FeedProps = {
-  posts: IPosts[];
+  searchResults: IPosts[];
 };
 
-const Feed = ({posts}: FeedProps) => {
+const Feed = ({searchResults}: FeedProps) => {
   return (
     <>
     {
-      posts.map((post, index) => (
+      searchResults.map((post, index) => (
         <Post ind={post.id} post={post} key={index}/>
       ))
     }

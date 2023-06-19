@@ -20,8 +20,8 @@
     },
     {
       "id": 4,
-      "title": "My Fourth Post",
-      "datetime": "July 01, 2021 11:17:36 AM",
+      "title": "My Fourth Post ok",
+      "datetime": "June 19, 2023 8:44:51 PM",
       "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
     },
     {
@@ -35,6 +35,18 @@
       "title": "Let's Kill'Em ALL",
       "datetime": "June 18, 2023 9:24:15 PM",
       "body": "So this post is about the methodical process of studying killers, their motives, their background, their life, their behavior, their though-process and abilities involving decision making to gather as much info as it's needed to develop a system that have this set of minimal of characteristics:\n > Can it tell from input about a person's characteristics ?\n > Can it tell from input their traits and personalities ?\n > Based on external input provided, can it tell if said person is capable or not to commit that same or related crimes again ?\n\nIt's an example and simple system that SHOULD be improved!!!"
+    },
+    {
+      "id": 10,
+      "title": "Change Something",
+      "datetime": "June 19, 2023 8:18:51 PM",
+      "body": "Another try::::"
+    },
+    {
+      "id": 11,
+      "title": "Actually I got it",
+      "datetime": "June 19, 2023 8:28:00 PM",
+      "body": "After reviewing the code, I was passing 'searchResults' and not 'posts' data... What a shame!"
     }
   ]
 }

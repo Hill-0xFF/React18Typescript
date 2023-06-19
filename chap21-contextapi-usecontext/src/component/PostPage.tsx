@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
 import { useParams, Link } from "react-router-dom"
 
 interface IPosts {
@@ -8,18 +10,17 @@ interface IPosts {
 }
 
 type PostPageProps = {
-  posts: IPosts[],
+  searchResults: IPosts[],
   // handleDeletePost: (id: string) => void,
   handleDeletePost: (id: number) => Promise<void>,
   handleUpdatePost: (id: number) => Promise<void>,
 }
 
-const PostPage = ({posts, handleDeletePost, handleUpdatePost}: PostPageProps) => {
+const PostPage = () => {
+  const {searchResults, handleDeletePost } = useContext<PostPageProps>(DataContext)
   
   const id = useParams()
-  // const tst = posts.find((post) => (post.id).toString() === Object.values(id).toString())
-  // console.log(tst);
-  const post = posts.find((post) => (post.id).toString() === Object.values(id).toString())
+  const post = searchResults.find((post) => (post.id).toString() === Object.values(id).toString())
   
   return (
     <main className="PostPage">

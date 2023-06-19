@@ -1,12 +1,20 @@
-import React from 'react';
+import { useContext } from 'react'
+import DataContext from '../context/DataContext'
 import {Link} from 'react-router-dom'
 
-type NavProps = {
-  search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
+// type NavProps = {
+//   search: string;
+//   setSearch: React.Dispatch<React.SetStateAction<string>>;
+//   // React.Dispatch<React.SetStateAction<string>>
   
-};
-const Nav = ({ search, setSearch }: NavProps) => {
+// };
+
+const Nav = () => {
+  // const { search, setSearch } = useContext<Record<string, ProviderProps<{}>>>(DataContext)
+  // const { search, setSearch } = useContext<Record<string, ProviderProps<React.Dispatch<React.SetStateAction<string>>>>>(DataContext)
+  // const { search, setSearch } = useContext<React.Context<{search: string, setSearch: React.Dispatch<React.SetStateAction<string>>}>>(DataContext)
+  const {search, setSearch} = useContext(DataContext)
+
   return (
     <nav>
       <form

@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
-import { IPosts } from "./Home"
+
+interface IPosts {
+  id: number;
+  title: string;
+  datetime: string;
+  body: string;
+}
 
 type PostProps = {
   ind: number,
