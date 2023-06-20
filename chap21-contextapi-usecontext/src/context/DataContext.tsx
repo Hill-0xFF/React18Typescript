@@ -1,15 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useAxiosFetch from '../hooks/useAxiosFetch';
 import useWindowSize from '../hooks/useWindowSize';
 import { format } from 'date-fns';
 import api from '../api/api';
 
 const DataContext: React.Context<any> = createContext({});
-
-// type DataProviderProps = {
-//   children: React.JSX.Element
-// }
 
 export const DataProvider = ({ children }: any) => {
 
