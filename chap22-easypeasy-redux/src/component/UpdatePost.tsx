@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { useStoreActions, Actions, useStoreState, State } from 'easy-peasy'
 import {IPostModel} from '../store'
-// import { useContext } from "react"
-// import DataContext from "../context/DataContext"
+import { format } from 'date-fns/esm'
 
 interface IUpdatePost {
   id: number,
@@ -22,15 +21,9 @@ type UpdatePostProps = {
 }
 
 const UpdatePost = () => {
-
-  // const { searchResults, updateBody, setUpdateBody, updateTitle, setUpdateTitle, handleUpdatePost } = useContext<UpdatePostProps>(DataContext)
-  
-  const searchResults = useStoreState(
-    (state: State<IPostModel>) => state.searchResults
-  )
-
   const history = useHistory()
-
+  const id = useParams();
+  
   const updateBody = useStoreState(
     (state: State<IPostModel>) => state.updateBody
   )
@@ -51,15 +44,17 @@ const UpdatePost = () => {
     (actions: Actions<IPostModel>) => actions.updatePost
   )
 
-  const handleUpdatePost = async (id: number) => {
-    await updatePost(id)
-    history.push('/')
-  }
+  const getPostById = useStoreState(
+    (state: State<IPostModel>) => state.getPostById
+  )
 
+  // const currentPost = getPostById(Object.values(id).toString())
+  const idval = Object.values(id).toString()
+  console.log('idval: ', typeof idval);
   
-  const id = useParams();
-  const currentPost = searchResults.find(post => (post.id).toString() === Object.values(id).toString())
-  console.log();
+  const currentPost = getPostById(Object.values(id).toString())
+  console.log('CurrentPost: ', currentPost);
+  
   
   useEffect(() => {
     if(currentPost) {
@@ -67,6 +62,14 @@ const UpdatePost = () => {
       setUpdateBody(currentPost.body)
     }
   }, [currentPost, setUpdateTitle, setUpdateBody])
+
+  const handleUpdatePost = async (id: number) => {
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
+    const updatedPost: IUpdatePost = { id, title: updateTitle, body: updateBody, datetime}
+    updatePost(updatedPost)
+    // history.push(`/post/${id}`)
+    history.push(`/`)
+  }
 
   return (
     <main className="NewPost">
@@ -85,7 +88,7 @@ const UpdatePost = () => {
             Post:
           </label>
           <textarea name="" id="postBody" cols={30} rows={10} required onChange={(evt) => setUpdateBody(evt.currentTarget.value)} value={updateBody}></textarea>
-          <button type="submit" onClick={() => handleUpdatePost(Number(currentPost?.id))}>Submit Post</button>
+          <button type="button" onClick={() => handleUpdatePost(currentPost?.id)}>Submit Post</button>
         </form>
         </>
         }

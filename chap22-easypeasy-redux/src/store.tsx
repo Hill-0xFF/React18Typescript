@@ -17,13 +17,12 @@ interface IPosts {
 }
 
 export interface IPostModel {
-  // state: StateMapper<FilterActionTypes<Record<string, never>>>;
   postCount: Computed<IPostModel, number>;
   // getPostById: Computed<IPostModel, (id: string) => undefined, IPosts[] >
-  getPostById: Computed<IPostModel, (id: string) => IPosts | undefined >;
+  getPostById: Computed<IPostModel, (id: string) => IPosts >;
   savePost: Thunk<IPostModel, any, Promise<void>>;
   deletePost: Thunk<IPostModel, any, Promise<void>>;
-  updatePost: Thunk<IPostModel, any, Promise<void>>;
+  updatePost: Thunk<IPostModel, unknown , Promise<void>>;
 
   search: string;
   searchResults: IPosts[];
@@ -54,7 +53,7 @@ export const DataStore = createStore<IPostModel>({
   }),
 
   posts: [],
-  setPosts: action<IPostModel>((state, payload) => {
+  setPosts: action<IPostModel>((state, payload: []) => {
     state.posts = payload;
   }),
 
@@ -79,8 +78,9 @@ export const DataStore = createStore<IPostModel>({
   }),
 
   postCount: computed((state) => state.posts.length),
+  
   getPostById: computed((state) => {
-    return (id) => state.posts.find(post => (post.id).toString() === id)
+    return (id: string) => state.posts.find(post => post.id.toString() === id)
   }),
 
   savePost: thunk<IPostModel>(async (actions, newPost, helpers) => {
@@ -110,10 +110,12 @@ export const DataStore = createStore<IPostModel>({
 
   updatePost: thunk<IPostModel>(async (actions, updatedPost, helpers) => {
     const { posts } = helpers.getState()
-    const id= updatedPost
+    const { id } = updatedPost
+    console.log('updatePost_store: ', id );
+    
     try {
       const response = await api.put(`/posts/${id}`, updatedPost)
-      actions.setPosts(posts.map(post => post.id === id ? {...response.data} : post))
+      actions.setPosts(posts.map(post => post.id === (id) ? {...response.data} : post))
       actions.setUpdateTitle('')
       actions.setUpdateBody('')
     } catch(err: any) {

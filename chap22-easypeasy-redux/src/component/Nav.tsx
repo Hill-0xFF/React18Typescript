@@ -31,12 +31,14 @@ const Nav = () => {
   )
 
   useEffect(() => {
+    console.log(posts);
+    
     const filteredPosts =
       posts &&
       posts.filter(
         (post) =>
-          post.body.toLowerCase().includes(search.toLowerCase()) ||
-          post.title.toLowerCase().includes(search.toLowerCase())
+          ((post.body).toLowerCase()).includes(search.toLowerCase()) ||
+          ((post.title).toLowerCase()).includes(search.toLowerCase())
       );
     setSearchResults(filteredPosts.reverse());
   }, [posts, search, setSearchResults]);
@@ -56,7 +58,7 @@ const Nav = () => {
           id="searchLabel"
           placeholder="Search Posts"
           value={search}
-          onChange={(evt) => setSearch(evt.currentTarget.value)}
+          onChange={(evt) => setSearch(evt.currentTarget?.value)}
         />
       </form>
       <ul>
