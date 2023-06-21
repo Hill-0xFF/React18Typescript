@@ -122,8 +122,7 @@ export const DataStore = createStore<IPostModel>({
     const history = useHistory()
     try {
       const response = await api.post('/posts', newPost)
-      const allPosts: IPosts[] = [...posts, response.data]
-      actions.setPosts(allPosts)
+      actions.setPosts([...posts, response.data])
       actions.setPostTitle('')
       actions.setPostBody('')
       history.push('/')
