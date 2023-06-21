@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useStoreState, useStoreActions, Actions, State } from 'easy-peasy';

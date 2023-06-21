@@ -4,47 +4,10 @@ import {
   thunk,
   computed,
   Action,
-  // StateMapper,
-  // FilterActionTypes,
   Computed,
   Thunk,
-  Actions,
 } from 'easy-peasy';
 import api from './api/api';
-// import api from './api/api';
-
-/*
-posts: string[],
-state: StateMapper<FilterActionTypes<{}>>,
-payload: any,
-
-const [posts, setPosts] = useState<TPosts[]>([]);
-  const [search, setSearch] = useState('');
-  const [searchResults, setSearchResults] = useState<
-    {
-      id: number;
-      title: string;
-      datetime: string;
-      body: string;
-    }[]
-  >([]);
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
-  const [updateTitle, setUpdateTitle] = useState('');
-  const [updateBody, setUpdateBody] = useState('');
-  const history = useHistory();
-  const { width } = useWindowSize();
-
-  search: '',
-  setSearch: action((state: StateMapper<FilterActionTypes<NonNullable<unknown>>>, payload) => {
-    state.search = payload;
-  }),
-  // eslint-disable-next-line react-refresh/only-export-components
-*/
-
-// interface IStore {
-//   state: StateMapper<FilterActionTypes<NonNullable<unknown>>>
-// }
 
 interface IPosts {
   id: number,
