@@ -1,6 +1,7 @@
-import { useContext } from 'react'
-import DataContext from '../context/DataContext'
 import {Link} from 'react-router-dom'
+import { useEffect } from 'react';
+import { useStoreState, useStoreActions, Actions, State } from 'easy-peasy';
+import { IPostModel } from '../store';
 
 // type NavProps = {
 //   search: string;
@@ -9,11 +10,47 @@ import {Link} from 'react-router-dom'
   
 // };
 
+/* 
+function MyComponent() {
+  const todos = useStoreState((state: State<StoreModel>) => state.todos.items);
+  return todos.map(todo => <Todo todo={todo} />);
+}
+
+*/
+
 const Nav = () => {
   // const { search, setSearch } = useContext<Record<string, ProviderProps<{}>>>(DataContext)
   // const { search, setSearch } = useContext<Record<string, ProviderProps<React.Dispatch<React.SetStateAction<string>>>>>(DataContext)
   // const { search, setSearch } = useContext<React.Context<{search: string, setSearch: React.Dispatch<React.SetStateAction<string>>}>>(DataContext)
-  const {search, setSearch} = useContext(DataContext)
+  // const {search, setSearch} = useContext(DataContext)
+
+  const setSearch = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setSearch
+  )
+
+  const setSearchResults = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setSearchResults
+  )
+
+  const posts = useStoreState( 
+    (state: State<IPostModel>) => state.posts
+  )
+
+  const search = useStoreState(
+    (state: State<IPostModel>) => state.search
+  )
+
+  useEffect(() => {
+    const filteredPosts =
+      posts &&
+      posts.filter(
+        (post) =>
+          post.body.toLowerCase().includes(search.toLowerCase()) ||
+          post.title.toLowerCase().includes(search.toLowerCase())
+      );
+    setSearchResults(filteredPosts.reverse());
+  }, [posts, search, setSearchResults]);
+
 
   return (
     <nav>

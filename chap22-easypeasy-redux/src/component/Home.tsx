@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import DataContext from '../context/DataContext';
 import Feed from './Feed';
 
 // export interface IPosts {
@@ -9,14 +7,14 @@ import Feed from './Feed';
 //   body: string;
 // }
 
-// export type HomeProps = {
-//   posts: IPosts[];
-//   loading: boolean;
-//   fetchError: null;
-// };
+export type HomeProps = {
+  // posts: IPosts[];
+  loading: boolean;
+  fetchError: null;
+};
 
-const Home = () => {
-  const { searchResults, loading, fetchError } = useContext(DataContext)
+const Home = ({loading, fetchError}: HomeProps) => {
+  // const { searchResults, loading, fetchError } = useContext(DataContext)
   return (
     <main className="main__home">
       {loading && (

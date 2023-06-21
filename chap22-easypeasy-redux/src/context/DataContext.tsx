@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import useAxiosFetch from '../hooks/useAxiosFetch';
 import useWindowSize from '../hooks/useWindowSize';
 import { format } from 'date-fns';
 import api from '../api/api';
@@ -33,13 +32,7 @@ export const DataProvider = ({ children }: any) => {
   const history = useHistory();
   const { width } = useWindowSize();
 
-  const { data, loading, fetchError } = useAxiosFetch(
-    'http://localhost:3500/posts'
-  );
 
-  useEffect(() => {
-    setPosts(data);
-  }, [data]);
 
   useEffect(() => {
     const filteredPosts =
@@ -117,8 +110,8 @@ export const DataProvider = ({ children }: any) => {
       setUpdateTitle,
       updateBody,
       setUpdateBody,
-      loading,
-      fetchError,
+      // loading,
+      // fetchError,
       handleDeletePost,
       handleNewPost,
       handleUpdatePost,

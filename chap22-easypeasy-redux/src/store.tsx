@@ -8,6 +8,7 @@ import {
   // FilterActionTypes,
   Computed,
   Thunk,
+  Actions,
 } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 import api from './api/api';
@@ -53,7 +54,7 @@ interface IPosts {
   datetime: string,
 }
 
-interface IPostModel {
+export interface IPostModel {
   // state: StateMapper<FilterActionTypes<Record<string, never>>>;
   postCount: Computed<IPostModel, number>;
   // getPostById: Computed<IPostModel, (id: string) => undefined, IPosts[] >
@@ -69,9 +70,10 @@ interface IPostModel {
   postBody: string;
   updateTitle: string;
   updateBody: string;
-  setSearch: Action<IPostModel>;
-  setSearchResults: Action<IPostModel>;
+  setSearch: Action<IPostModel, string>;
+  setSearchResults: Action<IPostModel, IPosts[]>;
   setPosts: Action<IPostModel, IPosts[]>;
+  // setPosts: Actions<IPostModel>;
   setPostTitle: Action<IPostModel, string>;
   setPostBody: Action<IPostModel, string>;
   setUpdateTitle: Action<IPostModel, string>;
@@ -161,3 +163,5 @@ export const DataStore = createStore<IPostModel>({
   })
 
 });
+
+// export default DataStore;
