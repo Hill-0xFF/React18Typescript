@@ -10,7 +10,6 @@ import {
   Thunk,
   Actions,
 } from 'easy-peasy';
-import { useHistory } from 'react-router-dom';
 import api from './api/api';
 // import api from './api/api';
 
@@ -123,13 +122,11 @@ export const DataStore = createStore<IPostModel>({
 
   savePost: thunk<IPostModel>(async (actions, newPost, helpers) => {
     const { posts } = helpers.getState();
-    const history = useHistory()
     try {
       const response = await api.post('/posts', newPost)
       actions.setPosts([...posts, response.data])
       actions.setPostTitle('')
       actions.setPostBody('')
-      history.push('/')
     } catch (err: any ) {
       console.log(`Error: ${err.message}`);
       
