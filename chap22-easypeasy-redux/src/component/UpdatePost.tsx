@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { useStoreActions, Actions, useStoreState, State } from 'easy-peasy'
 import {IPostModel} from '../store'
-// import { useContext, useEffect } from "react"
+// import { useContext } from "react"
 // import DataContext from "../context/DataContext"
 
 interface IUpdatePost {
@@ -23,9 +24,12 @@ type UpdatePostProps = {
 const UpdatePost = () => {
 
   // const { searchResults, updateBody, setUpdateBody, updateTitle, setUpdateTitle, handleUpdatePost } = useContext<UpdatePostProps>(DataContext)
+  
   const searchResults = useStoreState(
     (state: State<IPostModel>) => state.searchResults
   )
+
+  const history = useHistory()
 
   const updateBody = useStoreState(
     (state: State<IPostModel>) => state.updateBody
@@ -47,9 +51,13 @@ const UpdatePost = () => {
     (actions: Actions<IPostModel>) => actions.updatePost
   )
 
+  const handleUpdatePost = async (id: number) => {
+    await updatePost(id)
+    history.push('/')
+  }
+
   
   const id = useParams();
-  const history = useHistory()
   const currentPost = searchResults.find(post => (post.id).toString() === Object.values(id).toString())
   console.log();
   

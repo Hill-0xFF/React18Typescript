@@ -44,7 +44,7 @@ export interface IPostModel {
 
 export const DataStore = createStore<IPostModel>({
   search: '',
-  setSearch: action<IPostModel>((state, payload) => {
+  setSearch: action<IPostModel>((state, payload: string) => {
     state.search = payload;
   }),
 
@@ -110,7 +110,7 @@ export const DataStore = createStore<IPostModel>({
 
   updatePost: thunk<IPostModel>(async (actions, updatedPost, helpers) => {
     const { posts } = helpers.getState()
-    const  id = updatedPost
+    const id= updatedPost
     try {
       const response = await api.put(`/posts/${id}`, updatedPost)
       actions.setPosts(posts.map(post => post.id === id ? {...response.data} : post))
