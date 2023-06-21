@@ -1,6 +1,9 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useHistory } from "react-router-dom"
+import { useStoreState, State, useStoreActions, Actions } from 'easy-peasy'
+import { IPostModel } from "../store";
+
+// import { useContext } from "react";
+// import DataContext from "../context/DataContext";
 
 interface IPosts {
   id: number;
@@ -17,8 +20,20 @@ type PostPageProps = {
 }
 
 const PostPage = () => {
-  const {searchResults, handleDeletePost } = useContext<PostPageProps>(DataContext)
-  
+  // const {searchResults, handleDeletePost } = useContext<PostPageProps>(DataContext)
+  const history = useHistory()
+  const searchResults = useStoreState(
+    (state: State<IPostModel>) => state.searchResults
+  )
+
+  const deletePost = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.deletePost
+  )
+
+  const handleDeletePost = async (id: number) => {
+    deletePost(id)
+    history.push('/')
+  };
   const id = useParams()
   const post = searchResults.find((post) => (post.id).toString() === Object.values(id).toString())
   
