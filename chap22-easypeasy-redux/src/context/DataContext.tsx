@@ -56,23 +56,6 @@ export const DataProvider = ({ children }: any) => {
     }
   };
 
-  const handleNewPost = async (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
-    const newPost = { id, title: postTitle, datetime, body: postBody };
-    try {
-      const response = await api.post('/posts', newPost);
-      const allPost = [...posts, response.data];
-      setPosts(allPost);
-      setPostTitle('');
-      setPostBody('');
-      history.push('/');
-    } catch (err: any) {
-      console.log(`Error: ${err.message}`);
-    }
-  };
-
   const handleUpdatePost = async (id: number) => {
     // console.log(evt.currentTarget.value)
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
@@ -113,7 +96,7 @@ export const DataProvider = ({ children }: any) => {
       // loading,
       // fetchError,
       handleDeletePost,
-      handleNewPost,
+      // handleNewPost,
       handleUpdatePost,
     }}>
       {

@@ -17,6 +17,10 @@ import { IPostModel } from '../store';
 const NewPost = () => {
   const history = useHistory()
 
+  const posts = useStoreState(
+    (state: State<IPostModel>) => state.posts
+  )
+
   const postTitle = useStoreState(
     (state: State<IPostModel>) => state.postTitle
   )
@@ -30,9 +34,18 @@ const NewPost = () => {
     (actions: Actions<IPostModel>) => actions.setPostBody
   )
 
-  const handleNewPost = useStoreActions(
+  const savePost = useStoreActions(
     (actions: Actions<IPostModel>) => actions.savePost
   )
+
+  const handleNewPost = async (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = { id, title: postTitle, datetime, body: postBody };
+    savePost(newPost)
+    history.push('/')
+  };
 
   return (
     <main className="NewPost">
