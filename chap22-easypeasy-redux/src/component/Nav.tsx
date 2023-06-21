@@ -3,14 +3,9 @@ import { useEffect } from 'react';
 import { useStoreState, useStoreActions, Actions, State } from 'easy-peasy';
 import { IPostModel } from '../store';
 
-// type NavProps = {
-//   search: string;
-//   setSearch: React.Dispatch<React.SetStateAction<string>>;
-//   // React.Dispatch<React.SetStateAction<string>>
-  
-// };
 
 /* 
+based on hovering the state, similar snippet can be given hovering the actions =D
 function MyComponent() {
   const todos = useStoreState((state: State<StoreModel>) => state.todos.items);
   return todos.map(todo => <Todo todo={todo} />);
@@ -19,11 +14,7 @@ function MyComponent() {
 */
 
 const Nav = () => {
-  // const { search, setSearch } = useContext<Record<string, ProviderProps<{}>>>(DataContext)
-  // const { search, setSearch } = useContext<Record<string, ProviderProps<React.Dispatch<React.SetStateAction<string>>>>>(DataContext)
-  // const { search, setSearch } = useContext<React.Context<{search: string, setSearch: React.Dispatch<React.SetStateAction<string>>}>>(DataContext)
-  // const {search, setSearch} = useContext(DataContext)
-
+  
   const setSearch = useStoreActions(
     (actions: Actions<IPostModel>) => actions.setSearch
   )
