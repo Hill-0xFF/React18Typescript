@@ -63,7 +63,7 @@ const UpdatePost = () => {
     }
   }, [currentPost, setUpdateTitle, setUpdateBody])
 
-  const handleUpdatePost = async (id: number) => {
+  const handleUpdatePost = (id: number) => {
     const datetime = format(new Date(), 'MMMM dd, yyyy pp')
     const updatedPost: IUpdatePost = { id, title: updateTitle, body: updateBody, datetime}
     updatePost(updatedPost)
