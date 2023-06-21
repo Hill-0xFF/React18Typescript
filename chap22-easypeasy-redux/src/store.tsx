@@ -58,7 +58,9 @@ interface IPostModel {
   postCount: Computed<IPostModel, number>;
   // getPostById: Computed<IPostModel, (id: string) => undefined, IPosts[] >
   getPostById: Computed<IPostModel, (id: string) => IPosts | undefined >;
-  savePost: Thunk<IPostModel, undefined, any, Promise<void>>;
+  savePost: Thunk<IPostModel, any, Promise<void>>;
+  deletePost: Thunk<IPostModel, any, Promise<void>>;
+  updatePost: Thunk<IPostModel, any, Promise<void>>;
 
   search: string;
   searchResults: IPosts[];
@@ -128,6 +130,32 @@ export const DataStore = createStore<IPostModel>({
       history.push('/')
     } catch (err: any ) {
       console.log(`Error: ${err.message}`);
+      
+    }
+  }),
+
+  deletePost: thunk<IPostModel>(async (actions, id, helpers) => {
+    const { posts } = helpers.getState()
+    
+    try {
+      await api.delete(`/posts/${id}`);
+      const postList = posts.filter((post) => post.id !== id);
+      actions.setPosts(postList);
+    } catch (err: any) {
+      console.log(`Error: ${err.message}`);
+    }
+  }),
+
+  updatePost: thunk<IPostModel>(async (actions, updatedPost, helpers) => {
+    const { posts } = helpers.getState()
+    const  id = updatedPost
+    try {
+      const response = await api.put(`/posts/${id}`, updatedPost)
+      actions.setPosts(posts.map(post => post.id === id ? {...response.data} : post))
+      actions.setUpdateTitle('')
+      actions.setUpdateBody('')
+    } catch(err: any) {
+      console.log(err.message);
       
     }
   })
