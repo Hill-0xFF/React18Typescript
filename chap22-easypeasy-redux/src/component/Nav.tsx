@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useStoreState, useStoreActions, Actions, State } from 'easy-peasy';
 import { IPostModel } from '../store';
 
-
 /* 
 based on hovering the state, similar snippet can be given hovering the actions =D
 function MyComponent() {

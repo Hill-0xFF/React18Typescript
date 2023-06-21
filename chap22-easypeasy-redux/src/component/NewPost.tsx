@@ -1,5 +1,8 @@
-import { useContext } from "react"
-import DataContext from "../context/DataContext"
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { format } from 'date-fns';
+import { useStoreState, useStoreActions, Actions, State } from 'easy-peasy';
+import { IPostModel } from '../store';
 
 // type NewPostProps = {
 //   handleNewPost: (evt: React.FormEvent<HTMLFormElement>) => void,
@@ -12,13 +15,25 @@ import DataContext from "../context/DataContext"
 
 
 const NewPost = () => {
-  const {handleNewPost,
-    postTitle,
-    setPostTitle,
-    postBody,
-    setPostBody
-  } = useContext(DataContext)
-  
+  const history = useHistory()
+
+  const postTitle = useStoreState(
+    (state: State<IPostModel>) => state.postTitle
+  )
+  const postBody = useStoreState(
+    (state: State<IPostModel>) => state.postBody
+  )
+  const setPostTitle = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setPostTitle
+  )
+  const setPostBody = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setPostBody
+  )
+
+  const handleNewPost = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.savePost
+  )
+
   return (
     <main className="NewPost">
       <h2>New Post</h2>
