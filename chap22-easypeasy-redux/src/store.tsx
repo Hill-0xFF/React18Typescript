@@ -1,13 +1,16 @@
 import {
   createStore,
   action,
-  // thunk,
+  thunk,
   computed,
   Action,
   // StateMapper,
   // FilterActionTypes,
   Computed,
+  Thunk,
 } from 'easy-peasy';
+import { useHistory } from 'react-router-dom';
+import api from './api/api';
 // import api from './api/api';
 
 /*
@@ -54,7 +57,9 @@ interface IPostModel {
   // state: StateMapper<FilterActionTypes<Record<string, never>>>;
   postCount: Computed<IPostModel, number>;
   // getPostById: Computed<IPostModel, (id: string) => undefined, IPosts[] >
-  getPostById: Computed<IPostModel, (id: string) => IPosts | undefined >
+  getPostById: Computed<IPostModel, (id: string) => IPosts | undefined >;
+  savePost: Thunk<IPostModel, undefined, any, Promise<void>>;
+
   search: string;
   searchResults: IPosts[];
   posts: IPosts[];
@@ -64,11 +69,11 @@ interface IPostModel {
   updateBody: string;
   setSearch: Action<IPostModel>;
   setSearchResults: Action<IPostModel>;
-  setPosts: Action<IPostModel>;
-  setPostTitle: Action<IPostModel>;
-  setPostBody: Action<IPostModel>;
-  setUpdateTitle: Action<IPostModel>;
-  setUpdateBody: Action<IPostModel>;
+  setPosts: Action<IPostModel, IPosts[]>;
+  setPostTitle: Action<IPostModel, string>;
+  setPostBody: Action<IPostModel, string>;
+  setUpdateTitle: Action<IPostModel, string>;
+  setUpdateBody: Action<IPostModel, string>;
 }
 
 export const DataStore = createStore<IPostModel>({
@@ -88,28 +93,44 @@ export const DataStore = createStore<IPostModel>({
   }),
 
   postTitle: '',
-  setPostTitle: action<IPostModel>((state, payload) => {
+  setPostTitle: action<IPostModel>((state, payload: string) => {
     state.postTitle = payload;
   }),
 
   postBody: '',
-  setPostBody: action<IPostModel>((state, payload) => {
+  setPostBody: action<IPostModel>((state, payload: string) => {
     state.postBody = payload;
   }),
 
   updateTitle: '',
-  setUpdateTitle: action<IPostModel>((state, payload) => {
+  setUpdateTitle: action<IPostModel>((state, payload: string) => {
     state.updateTitle = payload;
   }),
 
   updateBody: '',
-  setUpdateBody: action<IPostModel>((state, payload) => {
+  setUpdateBody: action<IPostModel>((state, payload: string) => {
     state.updateBody = payload;
   }),
 
   postCount: computed((state) => state.posts.length),
   getPostById: computed((state) => {
     return (id) => state.posts.find(post => (post.id).toString() === id)
+  }),
+
+  savePost: thunk<IPostModel>(async (actions, newPost, helpers) => {
+    const { posts } = helpers.getState();
+    const history = useHistory()
+    try {
+      const response = await api.post('/posts', newPost)
+      const allPosts: IPosts[] = [...posts, response.data]
+      actions.setPosts(allPosts)
+      actions.setPostTitle('')
+      actions.setPostBody('')
+      history.push('/')
+    } catch (err: any ) {
+      console.log(`Error: ${err.message}`);
+      
+    }
   })
 
 });
