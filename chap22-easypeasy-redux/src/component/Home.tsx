@@ -1,3 +1,5 @@
+import { useStoreState, State } from 'easy-peasy';
+import { IPostModel } from '../store';
 import Feed from './Feed';
 
 // export interface IPosts {
@@ -14,7 +16,11 @@ export type HomeProps = {
 };
 
 const Home = ({loading, fetchError}: HomeProps) => {
-  // const { searchResults, loading, fetchError } = useContext(DataContext)
+
+  const searchResults = useStoreState(
+    (state: State<IPostModel>) => state.searchResults
+  )
+  
   return (
     <main className="main__home">
       {loading && (
