@@ -1,6 +1,8 @@
-import { useContext, useEffect } from "react"
-import { useParams, Link } from 'react-router-dom'
-import DataContext from "../context/DataContext"
+import { useParams, Link, useHistory } from 'react-router-dom'
+import { useStoreActions, Actions, useStoreState, State } from 'easy-peasy'
+import {IPostModel} from '../store'
+// import { useContext, useEffect } from "react"
+// import DataContext from "../context/DataContext"
 
 interface IUpdatePost {
   id: number,
@@ -20,9 +22,34 @@ type UpdatePostProps = {
 
 const UpdatePost = () => {
 
-  const { searchResults, updateBody, setUpdateBody, updateTitle, setUpdateTitle, handleUpdatePost } = useContext<UpdatePostProps>(DataContext)
+  // const { searchResults, updateBody, setUpdateBody, updateTitle, setUpdateTitle, handleUpdatePost } = useContext<UpdatePostProps>(DataContext)
+  const searchResults = useStoreState(
+    (state: State<IPostModel>) => state.searchResults
+  )
 
+  const updateBody = useStoreState(
+    (state: State<IPostModel>) => state.updateBody
+  )
+
+  const setUpdateBody = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setUpdateBody
+  )
+
+  const updateTitle = useStoreState(
+    (state: State<IPostModel>) => state.updateTitle
+  )
+
+  const setUpdateTitle = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.setUpdateTitle
+  )
+
+  const updatePost = useStoreActions(
+    (actions: Actions<IPostModel>) => actions.updatePost
+  )
+
+  
   const id = useParams();
+  const history = useHistory()
   const currentPost = searchResults.find(post => (post.id).toString() === Object.values(id).toString())
   console.log();
   
