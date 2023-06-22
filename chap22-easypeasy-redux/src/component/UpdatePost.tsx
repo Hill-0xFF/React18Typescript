@@ -11,15 +11,6 @@ interface IUpdatePost {
   body: string,
 }
 
-type UpdatePostProps = {
-  searchResults: IUpdatePost[],
-  updateBody: string,
-  setUpdateBody: React.Dispatch<React.SetStateAction<string>>,
-  updateTitle: string,
-  setUpdateTitle: React.Dispatch<React.SetStateAction<string>>,
-  handleUpdatePost: (id: number) => Promise<void>,
-}
-
 const UpdatePost = () => {
   const history = useHistory()
   const id = useParams();

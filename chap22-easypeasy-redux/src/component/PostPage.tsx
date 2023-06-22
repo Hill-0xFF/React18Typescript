@@ -2,23 +2,6 @@ import { useParams, Link, useHistory } from "react-router-dom"
 import { useStoreState, State, useStoreActions, Actions } from 'easy-peasy'
 import { IPostModel } from "../store";
 
-// import { useContext } from "react";
-// import DataContext from "../context/DataContext";
-
-interface IPosts {
-  id: number;
-  title: string;
-  datetime: string;
-  body: string;
-}
-
-type PostPageProps = {
-  searchResults: IPosts[],
-  // handleDeletePost: (id: string) => void,
-  handleDeletePost: (id: number) => Promise<void>,
-  handleUpdatePost: (id: number) => Promise<void>,
-}
-
 const PostPage = () => {
   // const {searchResults, handleDeletePost } = useContext<PostPageProps>(DataContext)
   const history = useHistory()
